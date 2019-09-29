@@ -1,7 +1,7 @@
 <template>
   <nav>
     <ul>
-      <router-link to="/" tag="li" activeClass="active">
+      <router-link to="/" tag="li">
         <a>Trader</a>
       </router-link>
 
@@ -89,6 +89,11 @@ ul li span {
 
 a:hover {
   text-decoration: none;
+}
+
+.active a {
+  color: #0e83cd;
+  background: white;
 }
 
 @media all and (max-width: 500px) {

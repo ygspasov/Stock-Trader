@@ -13,8 +13,6 @@ const mutations = {
       record.quantity = Number(record.quantity);
       stockQuantity = Number(stockQuantity);
       record.quantity += stockQuantity;
-      console.log(typeof record.quantity);
-      console.log(typeof stockQuantity);
       state.funds -= stockPrice * stockQuantity;
     } else if (stockQuantity * stockPrice <= state.funds) {
       state.stocks.push({
