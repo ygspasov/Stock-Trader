@@ -31,9 +31,9 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["rearrangeStocks", "setPortfolioStockPrices"]),
+    ...mapActions(["changeStockPrices", "setPortfolioStockPrices"]),
     endCurrentDay() {
-      this.rearrangeStocks();
+      this.changeStockPrices();
       this.setPortfolioStockPrices();
     },
     dropDown() {
