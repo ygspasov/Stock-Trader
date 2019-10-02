@@ -37,15 +37,22 @@ export default {
   name: "CreateStock",
   data() {
     return {
-      id: this.nextStockID(),
+      id: this.nextID,
       name: "",
       price: { type: Number, value: 0 },
       quantity: { type: Number, value: 0 },
       showHideForm: false
     };
   },
+  computed: {
+    getID() {
+      return this.nextStockID();
+    },
+    nextID() {
+      return this.$store.getters.nextStockID;
+    }
+  },
   methods: {
-    ...mapGetters(["nextStockID"]),
     ...mapActions(["addNewStock"]),
     createRecord: function() {
       let id = this.id;
@@ -59,6 +66,9 @@ export default {
         quantity
       };
       this.addNewStock(record);
+    },
+    myStokes: function() {
+      return this.$store.state.stocks;
     }
   }
 };
