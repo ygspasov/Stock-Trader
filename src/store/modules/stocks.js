@@ -16,6 +16,13 @@ const mutations = {
   },
   addNewStock(state, order) {
     state.stocks.push(order);
+  },
+  removeStock(state, id) {
+    for (let index = 0; index < state.stocks.length; index++) {
+      if (state.stocks[index].id == id) {
+        state.stocks.splice(index, 1);
+      }
+    }
   }
 };
 
@@ -31,6 +38,9 @@ const actions = {
   },
   addNewStock: ({ commit }, order) => {
     commit("addNewStock", order);
+  },
+  removeStock: ({ commit }, id) => {
+    commit("removeStock", id);
   }
 };
 

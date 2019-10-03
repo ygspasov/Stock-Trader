@@ -11,7 +11,7 @@
             </span>
           </div>
         </div>
-        <div class="float-left">
+        <div>
           <input
             type="number"
             class="form-control"
@@ -19,13 +19,15 @@
             v-model="quantity"
           />
         </div>
-        <div class="float-right">
+        <div>
           <button
-            class="btn btn-primary"
+            class="btn btn-primary float-left"
             @click="purchaseStock"
             :disabled="buyButtonDisabled ||notEnoughFunds"
           >Buy</button>
         </div>
+        <button class="btn btn-primary float-right" @click="removeStock(stock.id)">Remove</button>
+
         <p v-if="notEnoughFunds" class="float-right" id="notEnoughFunds">Insuficient funds!</p>
       </div>
     </div>
@@ -66,6 +68,9 @@ export default {
       };
       this.$store.dispatch("buyStock", order);
       this.quantity = 0;
+    },
+    removeStock: function(id) {
+      this.$store.dispatch("removeStock", id);
     }
   }
 };

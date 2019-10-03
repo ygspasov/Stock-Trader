@@ -19,10 +19,23 @@
                   class="form-control"
                   placeholder="New Stock Price"
                   v-model="price"
+                  min="0"
+                  value="0"
+                  step=".01"
                 />
               </div>
             </div>
-            <button type="submit" class="btn btn-primary" @click="createRecord">Add</button>
+            <div class="container">
+              <div class="row">
+                <div class="col text-center">
+                  <button
+                    class="btn btn-primary"
+                    @click="createRecord"
+                    :disabled="buyButtonDisabled"
+                  >Add new stock</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -45,11 +58,11 @@ export default {
     };
   },
   computed: {
-    getID() {
-      return this.nextStockID();
-    },
     nextID() {
       return this.$store.getters.nextStockID;
+    },
+    buyButtonDisabled() {
+      return !this.name || this.price <= 0;
     }
   },
   methods: {
@@ -74,12 +87,20 @@ export default {
 };
 </script>
 
-<style>
-.card-header {
-  text-align: center;
+<style scoped>
+.form-control {
+  margin-left: 3px;
 }
-.btn-primary {
-  background: #007bff;
-  float: right;
+
+.card-header {
+  background: #0e83cd;
+  color: white;
+  font-size: 20px;
+}
+.card-body {
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 1.25rem;
+  background: white;
 }
 </style>
