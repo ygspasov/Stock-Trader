@@ -19,16 +19,56 @@
             v-model="quantity"
           />
         </div>
-        <div>
+        <div class="button-group">
+          <button class="btn btn-primary" :disabled="false" @click="editMenuOpen=!editMenuOpen">Edit</button>
+
+          <button class="btn btn-primary" @click="removeStock(stock.id)">Remove</button>
           <button
             class="btn btn-primary float-left"
             @click="purchaseStock"
-            :disabled="buyButtonDisabled ||notEnoughFunds"
+            :disabled="quantity== 0"
           >Buy</button>
         </div>
-        <button class="btn btn-primary float-right" @click="removeStock(stock.id)">Remove</button>
-
-        <p v-if="notEnoughFunds" class="float-right" id="notEnoughFunds">Insuficient funds!</p>
+        <div v-if="editMenuOpen" class="card-body">
+          <div class="form-group">
+            <div class="form-group row">
+              <label for="name" class="col-sm-3 col-form-label">Stock</label>
+              <div class="col-sm-9">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Edit Stock Name"
+                  v-model="name"
+                />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="name" class="col-sm-3 col-form-label">Price</label>
+              <div class="col-sm-9">
+                <input
+                  type="number"
+                  class="form-control"
+                  v-model="price"
+                  min="0"
+                  value="0"
+                  step=".01"
+                />
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col text-center">
+                  <button
+                    class="btn btn-primary"
+                    @click="editSingleStock"
+                    :disabled="stockEditCondition"
+                  >Edit stock</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p v-if="notEnoughFunds" class="float-left" id="notEnoughFunds">Insuficient funds!</p>
       </div>
     </div>
   </div>
@@ -44,7 +84,10 @@ export default {
   },
   data() {
     return {
-      quantity: 0
+      name: "",
+      price: 0,
+      quantity: 0,
+      editMenuOpen: false
     };
   },
   computed: {
@@ -56,6 +99,9 @@ export default {
     },
     notEnoughFunds: function() {
       return this.quantity * this.stock.price > this.funds;
+    },
+    stockEditCondition: function() {
+      return this.price <= 0 || !this.stock;
     }
   },
   methods: {
@@ -71,6 +117,14 @@ export default {
     },
     removeStock: function(id) {
       this.$store.dispatch("removeStock", id);
+    },
+    editSingleStock: function() {
+      let order = {
+        id: this.stock.id,
+        name: this.name,
+        price: this.price
+      };
+      this.$store.dispatch("editStock", order);
     }
   }
 };
@@ -99,5 +153,15 @@ input {
 }
 .card-subtitle {
   text-align: center;
+}
+.button-group {
+  display: flex;
+  justify-content: space-between;
+}
+.form-group {
+  margin-bottom: 0;
+}
+.card-body .card-body {
+  padding-bottom: 0;
 }
 </style>

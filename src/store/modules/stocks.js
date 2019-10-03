@@ -23,6 +23,15 @@ const mutations = {
         state.stocks.splice(index, 1);
       }
     }
+  },
+  editStock(state, { id, name, price }) {
+    console.log(id, name, price);
+    state.stocks.forEach(stock => {
+      if (stock.id == id) {
+        stock.name = name;
+        stock.price = price;
+      }
+    });
   }
 };
 
@@ -41,6 +50,9 @@ const actions = {
   },
   removeStock: ({ commit }, id) => {
     commit("removeStock", id);
+  },
+  editStock: ({ commit }, order) => {
+    commit("editStock", order);
   }
 };
 
