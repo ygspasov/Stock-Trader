@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <ul class="list-group">
-        <li v-if="showOrHIdeAdvisor" class="list-group-item">
+        <li v-if="showOrHIdeAdvisor" class="list-group-item list-group-item-primary mb-2">
           The price of
           <strong>{{stock.name}}</strong> has increased by
           <strong>{{priceRise|showFunds}}</strong>

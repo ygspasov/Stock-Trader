@@ -5,7 +5,7 @@
         <Stock v-for="stock in stocks" :stock="stock" :key="stock.id"></Stock>
       </div>
       <div class="col-sm-12 col-md-4">
-        <h3 class="mb-3 mt-2">Trade Adviser</h3>
+        <h4 class="mb-3 mt-2" id="adviser-title">Trade Adviser</h4>
         <Adviser v-for="stock in stocks" :stock="stock" :key="stock.id"></Adviser>
         <p
           class="mt-2"
@@ -48,5 +48,13 @@ export default {
 .no-gutter {
   padding-left: 0;
   padding-right: 0;
+}
+
+#adviser-title {
+  background: #0e83cd;
+  color: white;
+  border-radius: 5px;
+  padding: 8px 10px;
+  text-align: center;
 }
 </style>

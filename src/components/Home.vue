@@ -1,9 +1,9 @@
 <template>
   <div>
     <h1>Trade or view the stocks in your portfolio</h1>
-    <h5>Purchase stocks from the Trade section</h5>
-    <h5>View your portfolo from the portfolio section</h5>
-    <h5>Click on "Next Day" to end the current day and use the Trade Adviser</h5>
+    <h5>Purchase stocks from the Stocks section</h5>
+    <h5>View your portfolo from the Portfolio section</h5>
+    <h5>Click on "Next Day" to end the current day, recalculate the new stock prices and use the Trade Adviser</h5>
     <p>The funds available to you: {{funds|showFunds}}</p>
   </div>
 </template>
