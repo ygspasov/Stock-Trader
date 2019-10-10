@@ -2,42 +2,49 @@
   <div class="container">
     <div class="d-flex justify-content-center bd-highlight mb-3">
       <div class="card bg-light mb-3" style="max-width: 22rem">
-        <div class="card-header" @click="showHideForm=!showHideForm">Add New Stock</div>
-        <div v-if="showHideForm" class="card-body">
-          <div class="form-group">
-            <div class="form-group row">
-              <label for="name" class="col-sm-3 col-form-label">Stock</label>
-              <div class="col-sm-9">
-                <input type="text" class="form-control" placeholder="New Stock Name" v-model="name" />
+        <div class="card-header" @click="showAndAnimate">Add New Stock</div>
+        <transition name="bounce">
+          <div v-if="showHideForm" class="card-body">
+            <div class="form-group">
+              <div class="form-group row">
+                <label for="name" class="col-sm-3 col-form-label">Stock</label>
+                <div class="col-sm-9">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="New Stock Name"
+                    v-model="name"
+                  />
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label for="name" class="col-sm-3 col-form-label">Price</label>
-              <div class="col-sm-9">
-                <input
-                  type="number"
-                  class="form-control"
-                  placeholder="New Stock Price"
-                  v-model="price"
-                  min="0"
-                  value="0"
-                  step=".01"
-                />
+              <div class="form-group row">
+                <label for="name" class="col-sm-3 col-form-label">Price</label>
+                <div class="col-sm-9">
+                  <input
+                    type="number"
+                    class="form-control"
+                    placeholder="New Stock Price"
+                    v-model="price"
+                    min="0"
+                    value="0"
+                    step=".01"
+                  />
+                </div>
               </div>
-            </div>
-            <div class="container">
-              <div class="row">
-                <div class="col text-center">
-                  <button
-                    class="btn btn-primary"
-                    @click="createRecord"
-                    :disabled="buyButtonDisabled"
-                  >Add new stock</button>
+              <div class="container">
+                <div class="row">
+                  <div class="col text-center">
+                    <button
+                      class="btn btn-primary"
+                      @click="createRecord"
+                      :disabled="buyButtonDisabled"
+                    >Add new stock</button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </transition>
       </div>
     </div>
   </div>
@@ -82,6 +89,9 @@ export default {
     },
     myStokes: function() {
       return this.$store.state.stocks;
+    },
+    showAndAnimate: function() {
+      this.showHideForm = !this.showHideForm;
     }
   }
 };

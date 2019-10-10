@@ -1,4 +1,4 @@
-<template>
+<template >
   <div class="row">
     <Stock v-for="stock in stocks" :stock="stock" :key="stock.id"></Stock>
     <CreateStock></CreateStock>

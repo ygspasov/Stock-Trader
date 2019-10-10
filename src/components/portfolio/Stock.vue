@@ -1,30 +1,32 @@
 <template>
-  <div class="card-body">
-    <h5 class="card-title">{{stock.name}}</h5>
-    <div class="container">
-      <div class="row">
-        <span class="card-subtitle mb-2 text-muted col">
-          Price:
-          <strong>{{stock.price |showFunds}}</strong>
-        </span>
-        <span class="card-subtitle mb-2 text-muted col">
-          Quantity:
-          <strong>{{stock.quantity}}</strong>
-        </span>
+  <transition name="bounce">
+    <div class="card-body">
+      <h5 class="card-title">{{stock.name}}</h5>
+      <div class="container">
+        <div class="row">
+          <span class="card-subtitle mb-2 text-muted col">
+            Price:
+            <strong>{{stock.price |showFunds}}</strong>
+          </span>
+          <span class="card-subtitle mb-2 text-muted col">
+            Quantity:
+            <strong>{{stock.quantity}}</strong>
+          </span>
+        </div>
       </div>
+      <div class="float-left">
+        <input type="number" class="form-control" :class="{error:outOfStock}" v-model="quantity" />
+      </div>
+      <div class="float-right">
+        <button
+          class="btn btn-primary"
+          @click="sellOrder"
+          :disabled="buyButtonDisabled || outOfStock"
+        >Sell</button>
+      </div>
+      <p v-if="outOfStock" class="float-right" id="outOfStock">Out of stock!</p>
     </div>
-    <div class="float-left">
-      <input type="number" class="form-control" :class="{error:outOfStock}" v-model="quantity" />
-    </div>
-    <div class="float-right">
-      <button
-        class="btn btn-primary"
-        @click="sellOrder"
-        :disabled="buyButtonDisabled || outOfStock"
-      >Sell</button>
-    </div>
-    <p v-if="outOfStock" class="float-right" id="outOfStock">Out of stock!</p>
-  </div>
+  </transition>
 </template>
 
 

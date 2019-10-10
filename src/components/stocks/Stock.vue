@@ -1,77 +1,83 @@
 <template>
-  <div class="col-sm-6 col-md-4">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">{{stock.name}}</h5>
-        <div class="container">
-          <div class="row">
-            <span class="card-subtitle mb-2 text-muted">
-              Price:
-              <strong>{{stock.price|showFunds}}</strong>
-            </span>
+  <transition name="bounce">
+    <div class="col-sm-6 col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{stock.name}}</h5>
+          <div class="container">
+            <div class="row">
+              <span class="card-subtitle mb-2 text-muted">
+                Price:
+                <strong>{{stock.price|showFunds}}</strong>
+              </span>
+            </div>
           </div>
-        </div>
-        <div>
-          <input
-            type="number"
-            class="form-control"
-            :class="{error: notEnoughFunds}"
-            v-model="quantity"
-          />
-        </div>
-        <div class="button-group">
-          <button class="btn btn-primary" :disabled="false" @click="editMenuOpen=!editMenuOpen">Edit</button>
+          <div>
+            <input
+              type="number"
+              class="form-control"
+              :class="{error: notEnoughFunds}"
+              v-model="quantity"
+            />
+          </div>
+          <div class="button-group">
+            <button
+              class="btn btn-primary"
+              :disabled="false"
+              @click="editMenuOpen=!editMenuOpen"
+            >Edit</button>
 
-          <button class="btn btn-primary" @click="removeStock(stock.id)">Remove</button>
-          <button
-            class="btn btn-primary float-left"
-            @click="purchaseStock"
-            :disabled="quantity== 0"
-          >Buy</button>
-        </div>
-        <div v-if="editMenuOpen" class="card-body">
-          <div class="form-group">
-            <div class="form-group row">
-              <label for="name" class="col-sm-3 col-form-label">Stock</label>
-              <div class="col-sm-9">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Edit Stock Name"
-                  v-model="name"
-                />
+            <button class="btn btn-primary" @click="removeStock(stock.id)">Remove</button>
+            <button
+              class="btn btn-primary float-left"
+              @click="purchaseStock"
+              :disabled="quantity== 0"
+            >Buy</button>
+          </div>
+          <div v-if="editMenuOpen" class="card-body">
+            <div class="form-group">
+              <div class="form-group row">
+                <label for="name" class="col-sm-3 col-form-label">Stock</label>
+                <div class="col-sm-9">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Edit Stock Name"
+                    v-model="name"
+                  />
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label for="name" class="col-sm-3 col-form-label">Price</label>
-              <div class="col-sm-9">
-                <input
-                  type="number"
-                  class="form-control"
-                  v-model="price"
-                  min="0"
-                  value="0"
-                  step=".01"
-                />
+              <div class="form-group row">
+                <label for="name" class="col-sm-3 col-form-label">Price</label>
+                <div class="col-sm-9">
+                  <input
+                    type="number"
+                    class="form-control"
+                    v-model="price"
+                    min="0"
+                    value="0"
+                    step=".01"
+                  />
+                </div>
               </div>
-            </div>
-            <div class="container">
-              <div class="row">
-                <div class="col text-center">
-                  <button
-                    class="btn btn-primary"
-                    @click="editSingleStock"
-                    :disabled="stockEditCondition"
-                  >Edit stock</button>
+              <div class="container">
+                <div class="row">
+                  <div class="col text-center">
+                    <button
+                      class="btn btn-primary"
+                      @click="editSingleStock"
+                      :disabled="stockEditCondition"
+                    >Edit stock</button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          <p v-if="notEnoughFunds" class="float-left" id="notEnoughFunds">Insuficient funds!</p>
         </div>
-        <p v-if="notEnoughFunds" class="float-left" id="notEnoughFunds">Insuficient funds!</p>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 
